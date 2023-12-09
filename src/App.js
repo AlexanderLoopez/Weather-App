@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import Weather from './components/Weather.js';
 
 function App() {
 
@@ -30,8 +31,7 @@ useEffect(() => {
         <Weather weatherData={data}/>
       ) : (
         <div></div>
-      )}
-
+      )};
     </div>
   );
 };

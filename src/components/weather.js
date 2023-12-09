@@ -1,19 +1,19 @@
 import React from 'react';
 import './styles.css';
-import { Card } from 'semantic-ui-css';
-import { CardContent, CardHeader } from 'semantic-ui-react';
+import moment from 'moment';
 
-const CardExampleCard = ({weatherData}) => (
-    <Card>
-        <CardContent>
-            <CardHeader className='header'>{weatherData.name}</CardHeader>
-            <p>Temperature: {weatherData.main.temp}</p>
-            <p>Sunrise: {weatherData.sys.sunrise}</p>
-            <p>Sunset: {weatherData.main.sunset}</p>
-            <p>Description: {weatherData.weather[0].description}</p>
-            <p>Humidity: {weatherData.main.humidity}</p>
-        </CardContent>
-    </Card>
-);
+function Weather({weatherData})  {
+  <div className='main'>
+    <p className='header'>{weatherData.name}</p>
+    <div>
+      <p className='day'>Day: {moment().format('dddd')}</p>
+    </div>
 
-export default CardExampleCard;
+    <div>
+      <p className='temp'>Temperature: {weatherData.main.temp} &deg;C</p>
+    </div>
+
+  </div>
+}
+
+export default Weather;
