@@ -2,11 +2,16 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import Weather from './components/Weather.js';
 
+const api = {
+  key: '7c3e05e851f1dfec62f00f4f999fcf0b',
+  base: 'https://api.openweathermap.org/data/2.5'
+}
+
 function App() {
 
 const [lat, setLat] = useState([]);
 const [long, setLong] = useState([]);
-const [data, setData] = useState([]);
+const [weatherData, setWeatherData] = useState([]);
 
 useEffect(() => {
   const fetchData = async () => {
@@ -15,23 +20,24 @@ useEffect(() => {
     setLong(position.coords.longitude);
   });
 
-  await fetch(`${process.env.REACT_APP_API_URL}/weather/? lat=${lat} & lon=${long} & units=metric & APPID=${process.env.REACT_APP_API_KEY}`)
+  await fetch(`${api.base}/weather/?lat=${lat}&lon={long}&units=metric&APPID=${api.key}}`)
   .then(res => res.json())
   .then(result => {
-    setData(result)
+    setWeatherData(result)
     console.log(result);
   });
 }
     fetchData();
-}, [lat, long]);
+}, [lat, long])
 
   return (
     <div className="App">
-      {(typeof data.main != 'undefined') ? (
-        <Weather weatherData={data}/>
-      ) : (
-        <div></div>
-      )};
+      {(typeof weatherData.main != 'undefined') ? (
+        <Weather weatherData={weatherData}/>
+      ): (
+        <div>
+        </div>
+      )}
     </div>
   );
 };
