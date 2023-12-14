@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import Weather from './components/Weather';
 
 function App() {
 
@@ -21,14 +22,17 @@ const [data, setData] = useState([]);
         console.log(result);
       });
     }
-  
+    fetchData();
   }, [lat, long])
 
-  return (
+   return (
     <div className="App">
-      <header>
-        <h1>weather</h1>
-      </header>
+      {(typeof data.main != 'undefined') ? (
+        <Weather weatherData={data} />
+      ): (
+        <div></div>
+      )}
+      
     </div>
   );
 };
