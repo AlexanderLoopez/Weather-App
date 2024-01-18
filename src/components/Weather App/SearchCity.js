@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import search from '../Assets/search.png'
+import clear from '../Assets/clear.png';
+import cloud from '../Assets/cloud.png';
+import drizzle from '../Assets/drizzle.png';
+import humidity from '../Assets/humidity.png';
+import rain from '../Assets/rain.png';
+import snow from '../Assets/snow.png';
+import wind from '../Assets/wind.png';
 
 const SearchCity = ({ onSearch }) => {
   const [city, setCity] = useState('');
@@ -25,6 +33,10 @@ const SearchCity = ({ onSearch }) => {
         onChange={(e) => setCity(e.target.value)}
       />
       <button onClick={handleSearch}>Search</button>
+      <div>
+        <p>City: {location.name}</p>
+        <p>Temperature: {location.main.temp}</p>
+      </div>
     </div>
   );
 };

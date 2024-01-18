@@ -1,7 +1,8 @@
 import './App.css';
 import React, { useState } from 'react';
-import SearchCity from './components/SearchCity';
-import UserLocation from './components/UserLocation'
+import SearchCity from './components/Weather App/SearchCity';
+import UserLocation from './components/Weather App/UserLocation';
+import search from '../Assets/search.png'
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
