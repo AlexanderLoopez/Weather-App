@@ -1,24 +1,22 @@
 import './App.css';
 import React, { useState } from 'react';
 import SearchCity from './components/Weather App/SearchCity';
-import UserLocation from './components/Weather App/UserLocation';
-import { WEATHER_API_URL, WEATHER_API_KEY } from './api';
+import CurrentLocation from './components/Weather App/UserLocation';
 
 function App() {
+  const [weatherData, setWeatherData] = useState(null);
 
-  const [currentWeather, setCurrentWeather] = useState(null);
+  const handleSearch = (data) => {
+    setWeatherData(data);
+  };
 
-  const handleOnSearchChange = (searchData) => {
-    const [lat, lon] = searchData.value.split('');
-
-    const currentWeatherFetch = fetch(
-      `${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
-    );
-  }
-
-   return (
-    <div className="container">
-      <SearchCity onSearchChange={handleOnSearchChange} />
+  return (
+    <div className="App">
+      <div className='logo-container'>
+        
+      </div>
+        <SearchCity onSearch={handleSearch} />
+        {weatherData && <CurrentLocation />}
     </div>
   );
 }

@@ -1,43 +1,32 @@
 import React, { useState } from 'react';
-import { AsyncPaginate } from "react-select-async-paginate";
-import { GEO_API_URL, geoApiOptions } from '../../api';
+import axios from 'axios';
 
-const SearchCity = ({ onSearchChange }) => {
+const SearchCity = ({ onSearch }) => {
+  const [city, setCity] = useState('');
 
-  const [search, setSearch] = useState(null);
-
-  const loadOptions = async (inputValue) => {
-
-    const response = await fetch(`${GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`,
-      geoApiOptions
-    );
-
-    const dataFetched = await response.json();
-    return {
-      options: dataFetched.data.map((city) => {
-        return {
-          value: `${city.latitud} ${city.longitude}`,
-          label: `${city.name}, ${city.countryCode}`,
-        };
-      }),
-    };
-  };
-
-  const handleOnChange = (searchData) => {
-    setSearch(searchData);
-    onSearchChange(searchData);
+  const handleSearch = async () => {
+    try {
+      const apiKey = '7c3e05e851f1dfec62f00f4f999fcf0b'
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+      );
+      onSearch(response.data);
+    } catch (error) {
+      console.error('Error fetching weather data:', error.message);
+    }
   };
 
   return (
-    <AsyncPaginate 
-      placeholder='Search for city'
-      debounceTimeout={600}
-      value={search}
-      onChange={handleOnChange}
-      loadOptions={loadOptions}
-    />
+    <div>
+      <input
+        type="text"
+        placeholder="Enter city"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
+    </div>
   );
 };
 
 export default SearchCity;
-
