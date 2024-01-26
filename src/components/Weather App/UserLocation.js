@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 const CurrentLocation = () => {
   const [location, setLocation] = useState(null);
 
@@ -30,7 +31,7 @@ const CurrentLocation = () => {
   }, []);
 
   return (
-    <div>
+    <div className='weather'>
       <h2>Current Location Weather</h2>
       {location && (
         <div>

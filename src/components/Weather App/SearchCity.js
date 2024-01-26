@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 const SearchCity = ({ onSearch }) => {
   const [city, setCity] = useState('');
 
@@ -19,6 +20,7 @@ const SearchCity = ({ onSearch }) => {
   return (
     <div>
       <input
+      className='search-input'
         type="text"
         placeholder="Enter city"
         value={city}
